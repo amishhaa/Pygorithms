@@ -1,0 +1,214 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #fff; /* White text */
+    background-color: #000; /* Black background */
+}
+
+header {
+    background-color: #333; /* Slightly lighter black for header */
+    color: #fff; /* White text */
+    text-align: center;
+    padding: 1rem 0;
+}
+
+main {
+    padding: 20px;
+}
+
+h1 {
+    color: #fff; /* Ensure headings are also white for consistency */
+}
+
+code {
+    background-color: #656562; /* Light grey background for code blocks */
+    color: #c8c6c6; /* Dark text for contrast */
+    padding: 2px 5px;
+    border-radius: 5px;
+    display: block;
+    white-space: pre;
+}
+
+/* Adjust the margin for sections to space out the content */
+section {
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333; /* Matching the header for a cohesive look */
+    color: #fff; /* White text */
+    text-align: center;
+    padding: 1rem 0;
+}
+h2 {
+    color: #fff; /* White text for consistency */
+    overflow: hidden; /* Keeps the text hidden till it's "typed" */
+    border-right: .15em solid white; /* Simulates the cursor */
+    white-space: nowrap; /* Keeps the text on a single line */
+    animation: typing 5s steps(30, end) forwards, blink-caret 1s step-end infinite;
+    /* Added 'forwards' to ensure the property values are retained after the animation completes */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #fff; /* White border for table cells */
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #333; /* Header background */
+}
+
+tr:nth-child(even) {
+    background-color: #555; /* Zebra striping for rows */
+}
+
+tr:hover {
+    background-color: #777; /* Hover effect for rows */
+}
+
+/* Existing styles remain unchanged */
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #333; /* Dark grey, matching header */
+    color: white; /* White text for visibility */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 100%; /* Optional: makes the button full width */
+    text-align: left; /* Aligns text to the left */
+}
+
+/* Container for the dropdown content, hidden by default */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute; /* Positioning relative to its positioned ancestor */
+    background-color: #333; /* Background color */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Adding some shadow for depth */
+    padding: 12px; /* Padding for content */
+    z-index: 1; /* Ensure it's above other content */
+    width: calc(100% - 24px); /* Adjust width as necessary, accounting for padding */
+}
+
+/* Show the dropdown content on demand */
+.show {
+    display: block;
+}
+
+/* Styling adjustments for positioning and appearance */
+.dropdown {
+    position: relative; /* Establishes a positioning context for dropdown content */
+}
+.function-dropdown {
+    position: relative; /* Establishes a positioning context for dropdown content */
+    display: block;
+}
+
+.function-dropbtn {
+    background-color: #444; /* Slightly different background to distinguish */
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.function-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0; /* Aligns content directly below the dropdown button */
+    top: 100%; /* Positions the dropdown content right below the button */
+    background-color: #444;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 100%; /* Ensures the width matches the dropdown button */
+}
+
+.function-dropdown-content.show {
+    display: block;
+}
+
+/* Additional nested dropdown styles if needed */
+.nested-dropdown, .nested-dropbtn, .nested-dropdown-content, .nested-dropdown-content p {
+    /* These styles were correctly set for nested functionality and remain unchanged */
+}
+JavaScript
+Extend the JavaScript functionality to handle clicks on the function-specific dropdowns (function-dropbtn) in addition to the main "Sorting Algorithms" dropdown button.
+
+javascript
+Copy code
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle clicks on the main dropdown button
+    document.querySelectorAll('.dropbtn').forEach(button => {
+        button.addEventListener('click', function() {
+            this.nextElementSibling.classList.toggle("show");
+        });
+    });
+
+    // Handle clicks on function-specific dropdown buttons
+    document.querySelectorAll('.function-dropbtn').forEach(button => {
+        button.addEventListener('click', function(event) {
+            // Prevent the main dropdown from closing when clicking on a function dropdown
+            event.stopPropagation();
+            this.nextElementSibling.classList.toggle("show");
+        });
+    });
+});
+
+// Close the dropdowns if the user clicks outside of them
+window.addEventListener('click', function(event) {
+    if (!event.target.matches('.dropbtn') && !event.target.matches('.function-dropbtn')) {
+        var dropdowns = document.querySelectorAll('.dropdown-content, .function-dropdown-content');
+        dropdowns.forEach(function(dropdown) {
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        });
+    }
+});
+.nested-dropdown {
+    position: relative;
+    display: block;
+}
+
+.nested-dropbtn {
+    background-color: #555; /* Slightly darker to differentiate from main dropdown */
+    color: white;
+    padding: 8px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.nested-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #555;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.nested-dropdown-content p {
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.nested-dropdown:hover .nested-dropdown-content {
+    display: block;
+}
